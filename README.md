@@ -1,7 +1,9 @@
 # Środowiska Udostępniania Usług - Projekt
 
 **Temat:** Strimzi + OTel
+
 **Autorzy:** Adam Górka, Karol Kiszka, Paweł Gacek, Łukasz Dydek  
+
 **Rok:** 2025
 
 ---
@@ -42,7 +44,7 @@ Dzięki jego modularnej budowie i wsparciu dla wielu języków programowania i f
 ### Minikube & kubectl
 Do uruchomienia środowiska Kubernetes w sposób lokalny wykorzystany zostanie Minikube.
 Narzędzie to pozwala na stworzenie w pełni funkcjonalnego klastra na maszynie deweloperskiej.
-Zapewnia, to łatwy sposób symulowania środowisk produkcyjnych bez potrzeby dostępu do pełnoskalowej infrastruktury chmurowej.
+Zapewnia to łatwy sposób symulowania środowisk produkcyjnych bez potrzeby dostępu do pełnoskalowej infrastruktury chmurowej.
 Za pomocą wiersza poleceń Kubectl umożliwia wykonywanie operacji administracyjnych oraz zarządznie zasobami w klastrze Kubernetes. 
 
 ### Grafana
