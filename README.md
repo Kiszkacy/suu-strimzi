@@ -4,7 +4,7 @@
 
 **Autorzy:** Adam Górka, Karol Kiszka, Paweł Gacek, Łukasz Dydek  
 
-**Rok:** 2025
+**Rok:** 2025, **Grupa:** 12
 
 ---
 
@@ -12,12 +12,13 @@
 
 1. [Wprowadzenie](#wprowadzenie)
 2. [Stos technologiczny](#stos-technologiczny)
-3. [Architektura systemu](#architektura-systemu)
-4. [Konfiguracja środowiska](#konfiguracja-środowiska)
-5. [Sposób instalacji](#sposób-instalacji)
-6. [Wykorzystanie AI w projekcie](#wykorzystanie-ai-w-projekcie)
-7. [Podsumowanie](#podsumowanie)
-8. [Źródła](#źródła)
+3. [Opis studium przypadku](#opis-studium-przypadku)
+4. [Architektura systemu](#architektura-systemu)
+5. [Konfiguracja środowiska](#konfiguracja-środowiska)
+6. [Sposób instalacji](#sposób-instalacji)
+7. [Wykorzystanie AI w projekcie](#wykorzystanie-ai-w-projekcie)
+8. [Podsumowanie](#podsumowanie)
+9. [Źródła](#źródła)
 
 
 ## Wprowadzenie
@@ -59,7 +60,7 @@ zaprojektowany z myślą o monitorowaniu i analizie działania aplikacji zbudowa
 Umożliwia śledzenie przepływu żądań pomiędzy usługami, co pozwala na dokładne zrozumienie, gdzie i dlaczego mogą występować opóźnienia lub błędy. 
 W ramach tego projektu Jaeger będzie zintegrowany z OpenTelemetry, co pozwoli na automatyczne zbieranie i wizualizację śladów (traces).
 
-## Opis koncepcji
+## Opis studium przypadku
 
 *(sekcja do uzupełnienia)*
 
