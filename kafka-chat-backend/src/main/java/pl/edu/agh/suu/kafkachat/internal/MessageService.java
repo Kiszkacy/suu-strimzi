@@ -25,7 +25,11 @@ public class MessageService {
     }
 
     public void sendMessage(Message message) {
-        kafkaTemplate.send(TOPIC, message);
+        kafkaTemplate.send(TOPIC, message).whenComplete((result, ex) -> {
+            if (ex != null) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 
     @KafkaListener(topics = TOPIC)
