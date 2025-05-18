@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-chat-backend
+  namespace: app
+  labels:
+    app: kafka-chat-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-chat-backend
+  template:
+    metadata:
+      name: kafka-chat-backend
+      labels:
+        app: kafka-chat-backend
+    spec:
+      containers:
+        - name: kafka-chat-backend
+          image: kafka-chat-backend
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          startupProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            failureThreshold: 20
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            failureThreshold: 5
+            periodSeconds: 5
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: my-cluster-kafka-bootstrap.kafka
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: kafka-chat-backend-svc
+    namespace: app
+spec:
+  type: NodePort
+  selector:
+    app: kafka-chat-backend
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30080
+      protocol: TCP
+

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: kafka-chat-backend
+  kafka:
+    bootstrap-servers: 10.107.39.3:9094
+    consumer:
+      group-id: chat-backend-group
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
