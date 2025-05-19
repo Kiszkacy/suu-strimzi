@@ -32,7 +32,7 @@ public class MessageService {
         });
     }
 
-    @KafkaListener(topics = TOPIC)
+    @KafkaListener(id = "kafka-chat-backend",topics = TOPIC)
     public void listen(ConsumerRecord<String, Message> record) {
         messageBuffer.add(record.value());
     }
