@@ -5,8 +5,26 @@ spring:
     bootstrap-servers: 10.107.39.3:9094
     consumer:
       group-id: chat-backend-group
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 management:
   endpoints:
     web:
       exposure:
         include: health,info
+otel:
+  logs:
+      exporter: none
+  metrics:
+    exporter: none
+  exporter:
+    otlp:
+      traces:
+        protocol: grpc
+
+
+  service:
+    name: kafka-chat-backend
