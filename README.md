@@ -20,7 +20,6 @@
 8. [Podsumowanie](#podsumowanie)
 9. [Źródła](#źródła)
 
-
 ## Wprowadzenie
 
 Projekt zakłada stworzenie środowiska demonstracyjnego wykorzystującego platformę Kubernetes do wdrożenia systemu złożonego z Apache Kafka, zarządzanego przez operatora Strimzi, oraz zestawu narzędzi do obserwowalności bazującego na OpenTelemetry. Celem jest przedstawienie praktycznego zastosowania Strimzi w zarządzaniu klastrem Kafka oraz wykorzystania OTel do monitorowania działania systemu – poprzez zbieranie metryk, logów i śladów (traces).
@@ -62,15 +61,58 @@ W ramach tego projektu Jaeger będzie zintegrowany z OpenTelemetry, co pozwoli n
 
 ## Opis studium przypadku
 
-*(sekcja do uzupełnienia)*
+Projekt zakłada stworzenie prostego komunikatora tekstowego opartego na brokerze Apache Kafka. Celem jest umożliwienie komunikacji w czasie rzeczywistym pomiędzy wieloma użytkownikami, z możliwością nadania pseudonimu i wyświetlania wiadomości publikowanych przez innych uczestników. 
+
+### Aplikacja
+Aplikacja składa się z części frontendowej i backendowej, które komunikują się między sobą przy użyciu Websocketów.
+
+Część frontendowa odpowiada za:
+
+- nawiązywanie połączenia z backendem,
+- przesyłanie nowo utworzonych wiadomości do backendu,
+- wyświetlanie interfejsu czatu użytkownikowi.
+
+Budowa wiadomości wysyłanej przez frontend do backendu:
+
+```json
+{
+  "message": "hello",
+  "username": "john"
+}
+```
+
+Część backendowa (serwer) realizuje następujące zadania:
+
+- odbieranie wiadomości z frontendu i publikowanie ich do systemu kolejkowego **Apache Kafka** na topic *messages*,
+- subskrybowanie tematu *messages* w Kafce oraz przesyłanie otrzymanych wiadomości do wszystkich połączonych frontendów.
+
+Wiadomość pochodząca z aplikacji frontendowej jest modyfikowana przez backend poprzez dodanie pola *timestamp*. Tak zmodyfikowana wiadomość jest przesyłana do kafki.
+```json
+{
+  "message": "hello",
+  "username": "john",
+  "timestamp": 1747979745
+}
+```
+
+
+### Monitorowanie
+W celu zapewnienia pełnej obserwowalności i monitorowania systemu, zintegrowano dodatkowe narzędzia: **Jaeger** do śledzenia rozproszonych operacji, **Prometheus** i **Grafana** do zbierania i wizualizacji metryk, oraz **Loki** do centralnego logowania. Projekt demonstruje połączenie architektury zdarzeniowej z nowoczesnymi narzędziami do monitoringu i debugowania.
 
 ## Architektura systemu
 
-*(sekcja do uzupełnienia)*
+![Architektura systemu](https://github.com/user-attachments/assets/62601da8-a899-41cd-91d0-8dc0a5ec1f66)
 
 ## Konfiguracja środowiska
 
-*(sekcja do uzupełnienia)*
+W celu skonfigurowania środowiska deweloperskiego i uruchomienia projektu lokalnie, potrzebne jest pobranie i skonfigurowanie następujących narzędzi:
+
+- JDK w wersji 21 -  niezbędne do kompilacji i uruchomienia aplikacji czatowej, która jest napisana w Javie z wykorzystaniem frameworka Spring Boot.
+- Docker / Docker Desktop - służy jako środowisko uruchomieniowe dla kontenerów. Jest wykorzystywany zarówno do budowania obrazów Docker dla naszej aplikacji, jak i jako sterownik dla Minikube, umożliwiając uruchomienie lokalnego klastra Kubernetes.
+- Minikube - narzędzie umożliwiające stworzenie i uruchomienie lekkiego, lokalnego klastra Kubernetes na maszynie deweloperskiej. Służy do symulowania środowiska produkcyjnego w celu testowania i rozwoju.
+- Kubectl - narzędzie wiersza poleceń do zarządzania klastrami Kubernetes. Umożliwia wdrażanie aplikacji, zarządzanie zasobami (takimi jak pody, serwisy, deploymenty) oraz interakcję z klastrem Minikube.
+- Helm - menedżer pakietów dla Kubernetes. Ułatwia wdrażanie i zarządzanie złożonymi aplikacjami.
+
 
 ## Sposób instalacji
 
