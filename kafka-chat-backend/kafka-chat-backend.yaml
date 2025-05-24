@@ -38,8 +38,8 @@ spec:
           env:
             - name: KAFKA_BOOTSTRAP_SERVERS
               value: my-cluster-kafka-bootstrap.kafka
-            - name: JAEGER_COLLECTOR_SERVICE
-              value: jaeger-collector.devops
+            - name: COLLECTOR_SERVICE
+              value: lgtm.observability
 
 ---
 

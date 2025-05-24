@@ -4,5 +4,4 @@ spring:
 otel:
   exporter:
     otlp:
-      traces:
-        endpoint: http://${JAEGER_COLLECTOR_SERVICE}:4317
+      endpoint: http://${COLLECTOR_SERVICE}:4318
