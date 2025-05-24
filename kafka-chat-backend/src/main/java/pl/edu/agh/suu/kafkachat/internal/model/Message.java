@@ -1,4 +1,4 @@
 package pl.edu.agh.suu.kafkachat.internal.model;
 
-public record Message(long timestamp, String content) {
+public record Message(String username, String content, long timestamp) {
 }
