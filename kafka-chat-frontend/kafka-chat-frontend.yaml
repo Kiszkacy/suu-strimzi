@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-chat-frontend
+  namespace: app
+  labels:
+    app: kafka-chat-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-chat-frontend
+  template:
+    metadata:
+      labels:
+        app: kafka-chat-frontend
+    spec:
+      containers:
+        - name: kafka-chat-frontend
+          image: kafka-chat-frontend
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-chat-frontend-svc
+  namespace: app
+spec:
+  type: NodePort
+  selector:
+    app: kafka-chat-frontend
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30081
+      protocol: TCP
