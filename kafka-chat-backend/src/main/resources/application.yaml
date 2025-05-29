@@ -2,7 +2,7 @@ spring:
   application:
     name: kafka-chat-backend
   kafka:
-    bootstrap-servers: 10.107.39.3:9094
+    bootstrap-servers: 127.0.0.1:9094
     consumer:
       group-id: ${random.uuid}
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
