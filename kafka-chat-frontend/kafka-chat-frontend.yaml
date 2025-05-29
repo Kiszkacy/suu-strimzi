@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
         - name: kafka-chat-frontend
-          image: kafka-chat-frontend
-          imagePullPolicy: Never
+          image: pwgacek/kafka-chat-frontend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
 
