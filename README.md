@@ -118,7 +118,7 @@ W projekcie wykorzystano aplikację **grafana/otel-lgtm**, która dostarcza wszy
 
 ## Architektura systemu
 
-![Architektura systemu](https://github.com/user-attachments/assets/62601da8-a899-41cd-91d0-8dc0a5ec1f66)
+![Architektura systemu](https://github.com/user-attachments/assets/3be53198-9cd5-4e32-bcfd-67a229716e0e)
 
 ## Konfiguracja środowiska
 
