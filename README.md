@@ -109,7 +109,8 @@ Wiadomość pochodząca z aplikacji frontendowej jest modyfikowana przez backend
 
 W celu zapewnienia pełnej obserwowalności i monitorowania systemu, zintegrowano narzędzia wchodzące w skład LGTM Stack: **Prometheus** do zbierania metryk, **Loki** do centralnego logowania, **Grafana** do wizualizacji danych oraz **Tempo** do śledzenia rozproszonych operacji (distributed tracing). Backend aplikacji został zintegrowany z OpenTelemetry, dzięki czemu wszystkie metryki, logi oraz ślady (traces) są automatycznie przesyłane do OpenTelemetry Collector, a następnie trafiają do odpowiednich komponentów LGTM Stack. 
 
-![alt text](image.png)
+![image](https://github.com/user-attachments/assets/a3f10fcf-609e-4f5f-8065-53297c522629)
+
 
 
 W projekcie wykorzystano aplikację **grafana/otel-lgtm**, która dostarcza wszystkie wymienione powyżej technologie w ramach jednego deploymentu, co znacznie upraszcza konfigurację i uruchomienie środowiska obserwowalności.
