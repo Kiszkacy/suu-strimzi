@@ -89,6 +89,7 @@ Budowa wiadomości wysyłanej przez frontend do backendu:
 
 ```json
 {
+  "chatName": "My chat",
   "message": "hello",
   "username": "john"
 }
@@ -102,6 +103,7 @@ Część backendowa (serwer) realizuje następujące zadania:
 Wiadomość pochodząca z aplikacji frontendowej jest modyfikowana przez backend poprzez dodanie pola *timestamp*. Tak zmodyfikowana wiadomość jest przesyłana do kafki.
 ```json
 {
+  "chatName": "My chat",
   "message": "hello",
   "username": "john",
   "timestamp": 1747979745
@@ -198,8 +200,9 @@ kubectl delete namespace app
 kubectl delete -f lgtm.yaml -n  observability
 kubectl delete namespace observability
 
-kubectl delete -f https://strimzi.io/examples/latest/kafka/kafka-single-node.yaml -n kafka 
-kubectl delete -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
+kubectl -n kafka delete $(kubectl get strimzi -o name -n kafka)
+kubectl delete pvc -l strimzi.io/name=my-cluster-kafka -n kafka
+kubectl -n kafka delete -f 'https://strimzi.io/install/latest?namespace=kafka'
 kubectl delete namespace kafka
 ```
 
