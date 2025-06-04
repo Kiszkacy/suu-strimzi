@@ -2,12 +2,15 @@ import React, {useEffect, useState, useRef} from 'react';
 import SockJS from 'sockjs-client';
 import {Client} from '@stomp/stompjs';
 import './App.css';
+import Sidebar from './Sidebar.js';
 
 function App() {
   const [username, setUsername] = useState('');
   const [messageContent, setMessageContent] = useState('');
   const [receivedMessages, setReceivedMessages] = useState([]);
   const stompClientRef = useRef(null);
+  const [chatRooms] = useState(['General', 'Support', 'Random']);
+  const [chatName, setChatName] = useState('General');
 
   useEffect(() => {
     const socket = new SockJS('http://localhost:8080/ws');
@@ -41,6 +44,7 @@ function App() {
       const message = {
         content: messageContent,
         username: username || 'anonymous',
+        chatName: chatName,
       };
       stompClientRef.current.publish({
         destination: '/app/messages/send',
@@ -60,44 +64,53 @@ function App() {
 
   return (
     <div className="chat-container">
-      <h1>WebSocket Chat</h1>
-
-      <label htmlFor="usernameInput">Username:</label>
-      <input
-        type="text"
-        id="usernameInput"
-        placeholder="Enter your name"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+      <Sidebar
+        chats={chatRooms}
+        selectedChat={chatName}
+        onSelectChat={(room) => setChatName(room)}
       />
 
-      <br/>
+      <div className="chat-main">
+        <h1>{chatName}</h1>
 
-      <label htmlFor="messageInput">Message:</label>
-      <input
-        type="text"
-        id="messageInput"
-        placeholder="Type your message..."
-        value={messageContent}
-        onChange={(e) => setMessageContent(e.target.value)}
-      />
-      <button onClick={sendMessage}>Send</button>
+        <label htmlFor="usernameInput">Username:</label>
+        <input
+          type="text"
+          id="usernameInput"
+          placeholder="Enter your name"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
 
-      <h2>Received Messages:</h2>
-      <ul id="messages">
-        {receivedMessages.map((msg, index) => {
-          const isOwnMessage = msg.username === (username || 'anonymous');
-          return (
-            <li
-              key={index}
-              className={isOwnMessage ? 'own-message' : 'other-message'}
-              title={formatTimestamp(msg.timestamp)}
-            >
-              <strong>{msg.username}</strong>: {msg.content}
-            </li>
-          );
-        })}
-      </ul>
+        <br/>
+
+        <label htmlFor="messageInput">Message:</label>
+        <input
+          type="text"
+          id="messageInput"
+          placeholder="Type your message..."
+          value={messageContent}
+          onChange={(e) => setMessageContent(e.target.value)}
+        />
+        <button onClick={sendMessage}>Send</button>
+
+        <ul id="messages">
+          {receivedMessages
+            .filter((msg) => msg.chatName === chatName)
+            .map((msg, index) => {
+              const isOwnMessage = msg.username === (username || 'anonymous');
+              return (
+                <li
+                  key={index}
+                  className={isOwnMessage ? 'own-message' : 'other-message'}
+                  title={formatTimestamp(msg.timestamp)}
+                >
+                  <strong>{msg.username}</strong>: {msg.content}
+                </li>
+              );
+            })}
+        </ul>
+      </div>
     </div>
   );
 }
