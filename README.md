@@ -110,6 +110,12 @@ Wiadomość pochodząca z aplikacji frontendowej jest modyfikowana przez backend
 }
 ```
 
+Zrzut ekranu z gotowej aplikacji, na którym widać wymianę wiadomości pomiędzy użytkownikami:
+
+![Frontend Aplikacja 1](docs/suu-1.png)
+
+Na zrzucie poniżej widać filtrowanie przesłanych wiadomości zależnie od wybranego chatu przez użytkownika:
+![Frontend Aplikacja 1](docs/suu-2.png)
 
 ### Monitorowanie
 
@@ -118,8 +124,17 @@ W celu zapewnienia pełnej obserwowalności i monitorowania systemu, zintegrowan
 ![image](https://github.com/user-attachments/assets/a3f10fcf-609e-4f5f-8065-53297c522629)
 
 
-
 W projekcie wykorzystano zasób [**grafana/otel-lgtm**](https://github.com/grafana/docker-otel-lgtm), który dostarcza wszystkie wymienione powyżej technologie w ramach jednego deploymentu, co znacznie upraszcza konfigurację i uruchomienie środowiska obserwowalności.
+
+
+Poniżej znajdują się zrzuty ekranu na których widoczny jest kolejno:
+
+- Prometheus z widocznymi metrykami:
+![Prometheus – metryki](docs/suu-3.png)
+- Loki z przykładowymi logami:
+![Loki – logi](docs/suu-4.png)
+- Tempo z widocznymi spanami pojedynczej operacji:
+![Tempo – traces](docs/suu-5.png)
 
 
 ## Architektura systemu
