@@ -112,10 +112,10 @@ Wiadomość pochodząca z aplikacji frontendowej jest modyfikowana przez backend
 
 Zrzut ekranu z gotowej aplikacji, na którym widać wymianę wiadomości pomiędzy użytkownikami:
 
-![Frontend Aplikacja 1](docs/suu-1.png)
+![Frontend Aplikacja 1](docs/suu-1.PNG)
 
 Na zrzucie poniżej widać filtrowanie przesłanych wiadomości zależnie od wybranego chatu przez użytkownika:
-![Frontend Aplikacja 1](docs/suu-2.png)
+![Frontend Aplikacja 1](docs/suu-2.PNG)
 
 ### Monitorowanie
 
@@ -130,11 +130,11 @@ W projekcie wykorzystano zasób [**grafana/otel-lgtm**](https://github.com/grafa
 Poniżej znajdują się zrzuty ekranu na których widoczny jest kolejno:
 
 - Prometheus z widocznymi metrykami:
-![Prometheus – metryki](docs/suu-3.png)
+![Prometheus – metryki](docs/suu-3.PNG)
 - Loki z przykładowymi logami:
-![Loki – logi](docs/suu-4.png)
+![Loki – logi](docs/suu-4.PNG)
 - Tempo z widocznymi spanami pojedynczej operacji:
-![Tempo – traces](docs/suu-5.png)
+![Tempo – traces](docs/suu-5.PNG)
 
 
 ## Architektura systemu
